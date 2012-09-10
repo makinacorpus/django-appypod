@@ -8,8 +8,8 @@ setup(
     version='0.0.1',
     author='Mathieu Leplatre',
     author_email='mathieu.leplatre@makina-corpus.com',
-    url='',
-    download_url='',
+    url='https://github.com/makinacorpus/django-appypod/',
+    download_url='http://pypi.python.org/pypi/django-appypod/',
     description='Render OpenDocument files from templates, using Appy POD',
     long_description=open(os.path.join(here, 'README.rst')).read() + '\n\n' + 
                      open(os.path.join(here, 'CHANGES')).read(),

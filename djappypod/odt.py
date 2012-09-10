@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import codecs
-import subprocess
-from fdfgen import forge_fdf
+import os
+import logging
+from tempfile import NamedTemporaryFile
 
 from django.template import Template
 from django.template import loader
@@ -9,6 +10,9 @@ from django.template.loader import find_template, LoaderOrigin
 
 from appy.pod.renderer import Renderer
 from appy.pod import PodError
+
+
+logger = logging.getLogger(__name__)
 
 
 class OdtTemplateError(Exception):
@@ -21,26 +25,36 @@ class OdtTemplate(Template):
         self.origin = origin
 
     def render(self, context):
-        resultfile = "/tmp/result.odt"
-        
-        logger.info("Render template '%s' to '%s'" % (self.origin.name, resultfile)
-        renderer = Renderer(self.origin.name, context, resultfile, overwriteExisting=True)
+        contextdict = {}
+        for d in context: contextdict.update(**d)
+        result = None
+        output = None
         try:
-            renderer.run()
-        except PodError, e:
+            with NamedTemporaryFile('rwb', suffix='.odt', delete=False) as f:
+                output = f.name
+                logger.debug("Render template '%s' to '%s'" % (self.origin.name, output))
+                renderer = Renderer(self.origin.name, contextdict, output, overwriteExisting=True)
+                renderer.run()
+            result = open(output, 'rb').read()
+        except (OSError, PodError), e:
             logger.error("Cannot render '%s' : %s" % (self.filepath, e))
             raise OdtTemplateError(e)
-        return open(resultfile, 'rb').read()
+        finally:
+            if output:
+                os.unlink(output)
+        return result
 
-
-# Monkey patches
+# 
+# Code taken from https://github.com/zyegfryed/djangocong-2011
+# Author: Sébastien Fievet - http://sebastien-fievet.fr
+#
 def get_template_from_string(source, origin=None, name=None):
     """
     Returns a compiled Template object for the given template code,
     handling template inheritance recursively.
     """
     if name and name.endswith('.odt'):
-        return PdfTemplate('odt', origin, name)
+        return OdtTemplate('odt', origin, name)
     return Template(source, origin, name)
 loader.get_template_from_string = get_template_from_string
 
@@ -65,7 +79,7 @@ def get_template(template_name):
         return (u'', -1)
 
     # Loading hacks
-    # Ignore UnicodeError, due to PDF file read
+    # Ignore UnicodeError, due to Odt file read
     codecs.register_error('strict', fake_strict_errors)
     # --//--
     template, origin = find_template(template_name)
