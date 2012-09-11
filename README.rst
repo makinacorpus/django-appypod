@@ -1,5 +1,5 @@
-*django-appypod* allows to serve OpenDocument Text files (*.odt) from templates
-and contexts, using `Appy POD <appyframework.org>`_framework.
+*django-appypod* allows to serve OpenDocument Text files (*.odt*) from templates
+and contexts, using `Appy POD <appyframework.org>`_ framework.
 
 =======
 INSTALL
@@ -59,7 +59,7 @@ Using classic views functions :
         return response
 
 
-Follow instructions in `Appy POD documentation<http://appyframework.org/podWritingTemplates.html>`_ 
+Follow instructions in `Appy POD documentation <http://appyframework.org/podWritingTemplates.html>`_ 
 for designing your OpenDocument templates.
 
 =======
