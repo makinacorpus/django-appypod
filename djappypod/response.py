@@ -5,7 +5,7 @@ from .odt import get_template
 
 class OdtTemplateResponse(TemplateResponse):
     def __init__(self, *args, **kwargs):
-        kwargs['content_type'] = 'application/vnd.oasis.opendocument.text'
+        kwargs.setdefault('content_type', 'application/vnd.oasis.opendocument.text')
         super(OdtTemplateResponse, self).__init__(*args, **kwargs)
 
     def resolve_template(self, template):

@@ -29,8 +29,13 @@ class OdtTemplate(Template):
         for d in context: contextdict.update(**d)
         result = None
         output = None
+        suffix = {
+            'application/vnd.oasis.opendocument.text': '.odt',
+            'application/ms-word': '.doc',
+            'application/pdf': '.pdf',
+        }[contextdict.get('content_type', 'application/vnd.oasis.opendocument.text')]
         try:
-            with NamedTemporaryFile('rwb', suffix='.odt', delete=False) as f:
+            with NamedTemporaryFile('rwb', suffix=suffix, delete=False) as f:
                 output = f.name
                 logger.debug("Render template '%s' to '%s'" % (self.origin.name, output))
                 renderer = Renderer(self.origin.name, contextdict, output, overwriteExisting=True)
