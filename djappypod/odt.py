@@ -40,7 +40,7 @@ class OdtTemplate(Template):
             logger.error("Cannot render '%s' : %s" % (self.filepath, e))
             raise OdtTemplateError(e)
         finally:
-            if output:
+            if output and os.path.exists(output):
                 os.unlink(output)
         return result
 
