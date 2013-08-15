@@ -15,7 +15,7 @@ setup(
                      open(os.path.join(here, 'CHANGES')).read(),
     license='LPGL, see LICENSE file.',
     install_requires=[
-        # 'appy.pod == 0.8.1',
+        'appy',
     ],
     packages=find_packages(),
     include_package_data = True,
