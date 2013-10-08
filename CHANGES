@@ -3,12 +3,12 @@ CHANGELOG
 =========
 
 0.0.2 (unreleased)
-==================
+------------------
 
-- Nothing changed yet.
-
+* Safety check before deleting document
+* Add Django and Appy in dependencies
 
 0.0.1 (2012-09-11)
-==================
+------------------
 
 - Initial working version.
