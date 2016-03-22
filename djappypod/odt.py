@@ -6,7 +6,14 @@ from tempfile import NamedTemporaryFile
 
 from django.template import Template
 from django.template import loader
-from django.template.loader import find_template, LoaderOrigin
+from django.template.loader import LoaderOrigin
+
+try:
+    from django.template.loader import find_template
+except:
+    from django.template import engines
+    find_template = engines['django'].engine.find_template
+
 
 from appy.pod.renderer import Renderer
 from appy.pod import PodError
