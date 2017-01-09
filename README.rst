@@ -9,30 +9,26 @@ INSTALL
 
     pip install django-appypod
 
-Requires ``appy.pod`` in python path. It has to be deployed manually, 
-since it does not come with any ``setup.py``. 
-
-A possibility is to create a ``.pth`` file in your *site-packages* folder,
-or modify ``sys.path`` on-the-fly.
-
-Alternatively, if you use *buildout*, a few lines do the job :
-
-::
-
-    [buildout]
-    extra-paths += src/appy-archive/
-    parts += download-appy-archive
-
-    [download-appy-archive]
-    recipe = hexagonit.recipe.download
-    url = https://launchpad.net/appy/0.8/0.8.1/+download/appy-0.8.1.zip
-    destination = src/appy-archive/
-
-
 
 =====
 USAGE
 =====
+
+In settings, add OdtTemplates template backend before DjangoTemplates one :
+
+::
+
+TEMPLATES = [
+    {
+        'BACKEND': 'djappypod.backend.OdtTemplates',
+    },
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        ...
+    },
+]
+
+
 
 Using class-based generic views :
 
@@ -67,6 +63,7 @@ AUTHORS
 =======
 
     * Mathieu Leplatre <mathieu.leplatre@makina-corpus.com>
+    * Gaël Utard <gael.utard@makina-corpus.com>
     * Template loading based on Sébastien Fievet's presentation at DjangoCong 2011
 
 |makinacom|_
