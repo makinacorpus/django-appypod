@@ -2,10 +2,16 @@
 CHANGELOG
 =========
 
-0.0.3 (unreleased)
+1.0.1-dev
 ------------------
 
-- Requires Django 1.8
+-
+
+
+1.0.0 (2017-01-14)
+------------------
+
+- Upgrade to Django 1.8
 
 
 0.0.2 (2013-10-08)
@@ -13,6 +19,7 @@ CHANGELOG
 
 * Safety check before deleting document
 * Add Django and Appy in dependencies
+
 
 0.0.1 (2012-09-11)
 ------------------
