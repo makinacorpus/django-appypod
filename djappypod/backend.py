@@ -57,9 +57,9 @@ class Template(object):
                 renderer = Renderer(self.path, context_dict, output, overwriteExisting=True)
                 renderer.run()
             result = open(output, 'rb').read()
-        except (OSError, PodError), e:
-            logger.error("Cannot render '%s' : %s" % (self.path, e))
-            raise OdtTemplateError(e)
+        except (OSError, PodError) as exc:
+            logger.error("Cannot render '%s' : %s" % (self.path, exc))
+            raise OdtTemplateError(exc)
         finally:
             if output and os.path.exists(output):
                 os.unlink(output)
