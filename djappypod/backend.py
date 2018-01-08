@@ -7,9 +7,18 @@ from tempfile import NamedTemporaryFile
 from django.template import engines, TemplateDoesNotExist
 from django.template.backends.base import BaseEngine
 from django.template.context import make_context
-
+from django.template.loaders.app_directories import Loader as BaseLoader
+from django.template.engine import Engine, _dirs_undefined
 
 logger = logging.getLogger(__name__)
+
+
+class Loader(BaseLoader):
+    def load_template_source(self, template_name, template_dirs=None):
+        for filepath in self.get_template_sources(template_name, template_dirs):
+            if filepath.endswith('.odt') and os.path.exists(filepath):
+                return filepath, filepath
+        raise TemplateDoesNotExist(template_name)
 
 
 class OdtTemplateError(Exception):
@@ -17,30 +26,16 @@ class OdtTemplateError(Exception):
 
 
 class OdtTemplates(BaseEngine):
+    app_dirname = 'templates'
+
     def __init__(self, params):
         params = params.copy()
         options = params.pop('OPTIONS').copy()
         super(OdtTemplates, self).__init__(params)
+        self.engine = Engine(self.dirs, self.app_dirs, **options)
 
-    def get_template_loaders(self):
-        loaders = []
-
-        for loader_name in engines['django'].engine.loaders:
-            loader = engines['django'].engine.find_template_loader(loader_name)
-            if loader is not None and hasattr(loader, 'get_template_sources'):
-                loaders.append(loader)
-        return tuple(loaders)
-
-
-    def get_template(self, template_name, *args, **kwargs):
-        if not template_name.endswith('.odt'):
-            raise TemplateDoesNotExist(template_name)
-        for loader in self.get_template_loaders():
-            for origin in loader.get_template_sources(template_name, None):
-                path = getattr(origin, 'name', origin)  # Django <1.9 compatibility
-                if os.path.exists(path):
-                    return Template(path)
-        raise TemplateDoesNotExist(template_name)
+    def get_template(self, template_name, dirs=_dirs_undefined):
+        return Template(self.engine.get_template(template_name, dirs))
 
 
 class Template(object):

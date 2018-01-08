@@ -5,7 +5,7 @@ CHANGELOG
 1.0.1-dev
 ------------------
 
--
+- Fix loading with cache enabled
 
 
 1.0.0 (2017-01-14)
