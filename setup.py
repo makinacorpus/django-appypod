@@ -18,6 +18,9 @@ setup(
         'Django',
         'appy',
     ],
+    dependency_links=[
+        "git+ssh://git@github.com/LePetitTim/appypod.git@master#egg=appy"
+    ],
     packages=find_packages(),
     include_package_data = True,
     zip_safe = False,
