@@ -51,7 +51,7 @@ class Template(object):
         context_dict = make_context(context, request).flatten()
         output = None
         try:
-            with NamedTemporaryFile('rwb', suffix='.odt', delete=False) as f:
+            with NamedTemporaryFile('r+b', suffix='.odt', delete=False) as f:
                 output = f.name
                 logger.debug("Render template '%s' to '%s'" % (self.path, output))
                 renderer = Renderer(self.path, context_dict, output, overwriteExisting=True)
