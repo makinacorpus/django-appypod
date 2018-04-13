@@ -19,7 +19,7 @@ setup(
         'appy',
     ],
     dependency_links=[
-        "git+ssh://git@github.com/LePetitTim/appypod.git@master#egg=appy"
+        "git+ssh://github.com/stefanklug/appypod.git@master#appy"
     ],
     packages=find_packages(),
     include_package_data = True,
