@@ -16,10 +16,6 @@ setup(
     license='LPGL, see LICENSE file.',
     install_requires=[
         'Django',
-        'appy',
-    ],
-    dependency_links=[
-        "git+ssh://github.com/stefanklug/appypod.git@master#appy"
     ],
     packages=find_packages(),
     include_package_data = True,
