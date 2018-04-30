@@ -11,8 +11,8 @@ setup(
     url='https://github.com/makinacorpus/django-appypod/',
     download_url='http://pypi.python.org/pypi/django-appypod/',
     description='Render OpenDocument files from templates, using Appy POD',
-    long_description=open(os.path.join(here, 'README.rst')).read() + '\n\n' + 
-                     open(os.path.join(here, 'CHANGES')).read(),
+    long_description=open(os.path.join(here, 'README.rst'), encoding='utf-8').read() + '\n\n' +
+                     open(os.path.join(here, 'CHANGES'), encoding='utf-8').read(),
     license='LPGL, see LICENSE file.',
     install_requires=[
         'Django',
