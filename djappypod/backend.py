@@ -51,13 +51,13 @@ class Template(object):
         context_dict = make_context(context, request).flatten()
         output = None
         try:
-            with NamedTemporaryFile('rwb', suffix='.odt', delete=False) as f:
+            with NamedTemporaryFile('wb', suffix='.odt', delete=False) as f:
                 output = f.name
                 logger.debug("Render template '%s' to '%s'" % (self.path, output))
                 renderer = Renderer(self.path, context_dict, output, overwriteExisting=True)
                 renderer.run()
             result = open(output, 'rb').read()
-        except (OSError, PodError), e:
+        except (OSError, PodError) as e:
             logger.error("Cannot render '%s' : %s" % (self.path, e))
             raise OdtTemplateError(e)
         finally:
