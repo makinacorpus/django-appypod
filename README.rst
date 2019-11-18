@@ -18,15 +18,15 @@ In settings, add OdtTemplates template backend before DjangoTemplates one :
 
 ::
 
-TEMPLATES = [
-    {
-        'BACKEND': 'djappypod.backend.OdtTemplates',
-    },
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        ...
-    },
-]
+    TEMPLATES = [
+        {
+            'BACKEND': 'djappypod.backend.OdtTemplates',
+        },
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            ...
+        },
+    ]
 
 
 
