@@ -16,9 +16,7 @@ setup(
     license='LPGL, see LICENSE file.',
     install_requires=[
         'Django',
-    ],
-    dependency_links=[
-        "git+https://github.com/lino-framework/appypod.git@dbf123584cd9c5ef4a35e8efb9f489eaa54e26f2#egg=appy"
+        'appy',
     ],
     packages=find_packages(),
     include_package_data = True,
