@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-2.0.2.dev0
+2.0.2 (2019-11-25)
 ------------------
 
 - Fix dependency to appy (use Python 3 version)
