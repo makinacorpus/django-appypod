@@ -2,10 +2,10 @@
 CHANGELOG
 =========
 
-2.0.3.dev0
+2.0.3 (2019-12-26)
 ------------------
 
-- Migrate to Django2
+- Add Django 2.0 support
 
 
 2.0.2 (2019-11-25)
