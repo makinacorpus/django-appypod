@@ -36,7 +36,7 @@ class OdtTemplates(BaseEngine):
         if not template_name.endswith('.odt'):
             raise TemplateDoesNotExist(template_name)
         for loader in self.get_template_loaders():
-            for origin in loader.get_template_sources(template_name, None):
+            for origin in loader.get_template_sources(template_name):
                 path = getattr(origin, 'name', origin)  # Django <1.9 compatibility
                 if os.path.exists(path):
                     return Template(path)
