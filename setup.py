@@ -16,7 +16,7 @@ setup(
     license='LPGL, see LICENSE file.',
     install_requires=[
         'Django',
-        'appy-python-3',
+        'appy-python-3@git+ssh://git@github.com/GeotrekCE/appy-python-3@b3f31e8c0c1e1dd774a526d3c1e0a5b48bdb43d7',
     ],
     packages=find_packages(),
     include_package_data = True,
