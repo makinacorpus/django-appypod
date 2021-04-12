@@ -16,7 +16,7 @@ setup(
     license='LPGL, see LICENSE file.',
     install_requires=[
         'Django',
-        'appy-python-3>=2020.11.24',
+        'appy',
     ],
     packages=find_packages(),
     include_package_data = True,
